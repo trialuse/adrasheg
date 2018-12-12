@@ -1,0 +1,53 @@
+<?php
+$this->headTitle('Category');
+?>
+
+<h1>Manage Images</h1>
+
+<p>
+<a class="btn btn-default" href="
+    <?= $this->url('category', ['action'=>'add']); ?>">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Image
+</a>
+</p>
+
+<table class="table table-hover">
+
+   <tr>
+        <th>Image</th>
+        <th>Main</th>
+        <th>Category</th>
+        <th>Actions</th>
+    </tr>
+    
+    <?php foreach ($categories as $category): ?>
+    
+    <tr>
+        <td><img src="./upload/images/<?= $this->escapeHtml($category->getImage()); ?>" alt="<?= $this->escapeHtml($category->getImage()); ?>" class="img-thumbnail"></td>
+        <td>
+            <?php if($category->getIsMain() == 1){ ?>
+                <span class="glyphicon glyphicon-check" ></span>
+            <?php }else{?>
+                <span class="glyphicon glyphicon-remove" ></span>
+            <?php }?>
+        </td>
+        <td><?= $this->escapeHtml($category->getCategory()); ?></td>
+        <td>
+            <nobr>
+            <a class="btn btn-info" href="<?= $this->url('category',
+                    ['action'=>'main', 'id'=>$category->getId()]); ?>">
+                <span class="glyphicon glyphicon-check" ></span> Main?
+            </a>
+            <a class="btn btn-danger" href="<?= $this->url('category',
+                    ['action'=>'delete', 'id'=>$category->getId()]); ?>">
+                <span class="glyphicon glyphicon-remove"></span> Delete
+            </a>
+            </nobr>
+        </td>    
+    </tr>
+        
+    <?php endforeach; ?>   
+    
+</table>
+
+
